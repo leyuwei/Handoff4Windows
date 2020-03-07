@@ -6,12 +6,12 @@ FileRead, url, url.txt
 cb = %clipboard%
 If (InStr(cb,"http://") or InStr(cb,"HTTP://") or InStr(cb,"https://") or InStr(cb,"HTTPS://"))
 {
-    copy := "?url=%cb%"
-	cb := "Incoming URL Link"
+    copy := "?url=" . cb
+    cb := "Incoming URL Link"
 } else {
-	copy := "?automaticallyCopy=1&url=%cb%&copy=%cb%"
+	copy := "?automaticallyCopy=1&copy=" . cb
 }
 finalURL = %url%%cb%%copy%
 req := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-req.Open("POST", finalURL)
+req.Open("GET", finalURL)
 req.Send()
